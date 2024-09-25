@@ -16,6 +16,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class HelloApplication extends Application
 {
     @Override
@@ -40,6 +42,11 @@ public class HelloApplication extends Application
         Scene scene = new Scene(grid, 300, 275);
         primaryStage.setScene(scene);
         primaryStage.setTitle("JavaFX Welcome");
+
+        //Carga del CSS
+        scene.getStylesheets().add
+                (Objects.requireNonNull(getClass().getClassLoader().getResource("estilo.css")).toExternalForm());
+
         primaryStage.show();
     }
 
@@ -52,6 +59,7 @@ public class HelloApplication extends Application
         //Texto en grande
         Text sceneTitle = new Text("Welcome");
         sceneTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        sceneTitle.setId("welcome-text");
         //Parametros: numero columna, fila, span de columna, span de fila
         grid.add(sceneTitle, 0, 0, 2, 1);
 
@@ -80,6 +88,7 @@ public class HelloApplication extends Application
         //Creamos este texto que usaremos para mostrarle algo al usuario cuando interactue con el boton
         final Text actionTarget = new Text();
         grid.add(actionTarget, 1, 6);
+        actionTarget.setId("actiontarget");
 
         //Cuando se pulse el boton se cambiara el color y el texto
         btn.setOnAction(_ -> {
